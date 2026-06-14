@@ -26,10 +26,7 @@ services:
     staticPublishPath: "./frontend/dist"
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: protocol-sift-backend
-          property: url
+        sync: false # Set this in Render dashboard to your backend URL (e.g. https://protocol-sift-backend-xxxx.onrender.com)
 
   # Redis Service for Celery/Backend caching
   - type: redis
