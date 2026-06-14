@@ -1,0 +1,38 @@
+services:
+  # Backend FastAPI Service
+  - type: web
+    name: protocol-sift-backend
+    env: python
+    buildCommand: "cd backend && pip install -r requirements.txt"
+    startCommand: "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT --app-dir app"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: MONGO_URI
+        generateValue: true # Replace with actual Mongo URI if not using Render's generated one
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: protocol-sift-redis
+          property: connectionString
+      - key: GEMINI_API_KEY
+        sync: false # User must set this in the Render dashboard
+
+  # Frontend React (Vite) Static Site
+  - type: web
+    name: protocol-sift-frontend
+    env: static
+    buildCommand: "cd frontend && npm install && npm run build"
+    staticPublishPath: "./frontend/dist"
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: protocol-sift-backend
+          property: url
+
+  # Redis Service for Celery/Backend caching
+  - type: redis
+    name: protocol-sift-redis
+    ipAllowList: [] # only allow internal connections
+    plan: free
