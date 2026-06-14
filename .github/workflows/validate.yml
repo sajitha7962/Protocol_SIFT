@@ -1,0 +1,79 @@
+name: Validate Protocol SIFT
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  backend-test:
+    runs-on: ubuntu-latest
+
+    # Spin up MongoDB Community Server as a service container
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.runCommand({ping:1})'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      MONGODB_URI: mongodb://localhost:27017/protocol_sift
+      MONGODB_DB: protocol_sift
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Verify MongoDB connectivity
+        run: |
+          mongosh --eval "db.runCommand({ping:1})" mongodb://localhost:27017
+
+      - name: Verify FastAPI app imports cleanly
+        run: |
+          cd backend
+          PYTHONPATH=app python -c "from app.main import app; print('✓ app imports OK')"
+
+      - name: Run Pytest
+        run: |
+          cd backend
+          PYTHONPATH=app pytest --tb=short -q
+
+  frontend-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Build and typecheck
+        run: |
+          cd frontend
+          npm run build
+

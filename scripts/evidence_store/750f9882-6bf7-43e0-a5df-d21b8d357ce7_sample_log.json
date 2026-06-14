@@ -1,0 +1,128 @@
+[
+  {
+    "timestamp": "2026-06-14T12:00:00.000Z",
+    "source": "SSH",
+    "host": "server01",
+    "user": "admin",
+    "ip": "185.220.101.5",
+    "process": "",
+    "event_type": "FailedPassword",
+    "severity": "medium",
+    "event_data": {
+      "message": "Failed password for invalid user admin from 185.220.101.5 port 42812 ssh2"
+    }
+  },
+  {
+    "timestamp": "2026-06-14T12:00:30.000Z",
+    "source": "SSH",
+    "host": "server01",
+    "user": "admin",
+    "ip": "185.220.101.5",
+    "process": "",
+    "event_type": "FailedPassword",
+    "severity": "medium",
+    "event_data": {
+      "message": "Failed password for invalid user admin from 185.220.101.5 port 42814 ssh2"
+    }
+  },
+  {
+    "timestamp": "2026-06-14T12:01:00.000Z",
+    "source": "SSH",
+    "host": "server01",
+    "user": "admin",
+    "ip": "185.220.101.5",
+    "process": "",
+    "event_type": "FailedPassword",
+    "severity": "medium",
+    "event_data": {
+      "message": "Failed password for invalid user admin from 185.220.101.5 port 42816 ssh2"
+    }
+  },
+  {
+    "timestamp": "2026-06-14T12:01:30.000Z",
+    "source": "SSH",
+    "host": "server01",
+    "user": "admin",
+    "ip": "185.220.101.5",
+    "process": "",
+    "event_type": "FailedPassword",
+    "severity": "medium",
+    "event_data": {
+      "message": "Failed password for invalid user admin from 185.220.101.5 port 42818 ssh2"
+    }
+  },
+  {
+    "timestamp": "2026-06-14T12:02:00.000Z",
+    "source": "SSH",
+    "host": "server01",
+    "user": "admin",
+    "ip": "185.220.101.5",
+    "process": "",
+    "event_type": "FailedPassword",
+    "severity": "medium",
+    "event_data": {
+      "message": "Failed password for invalid user admin from 185.220.101.5 port 42820 ssh2"
+    }
+  },
+  {
+    "timestamp": "2026-06-14T12:02:30.000Z",
+    "source": "SSH",
+    "host": "server01",
+    "user": "admin",
+    "ip": "185.220.101.5",
+    "process": "",
+    "event_type": "FailedPassword",
+    "severity": "medium",
+    "event_data": {
+      "message": "Failed password for invalid user admin from 185.220.101.5 port 42822 ssh2"
+    }
+  },
+  {
+    "timestamp": "2026-06-14T12:03:00.000Z",
+    "source": "Sysmon",
+    "host": "server01",
+    "user": "nginx",
+    "ip": "",
+    "process": "C:\\Windows\\System32\\cmd.exe",
+    "event_type": "Sysmon-1",
+    "severity": "low",
+    "event_data": {
+      "ParentImage": "C:\\nginx\\nginx.exe",
+      "CommandLine": "cmd.exe /c whoami",
+      "Image": "C:\\Windows\\System32\\cmd.exe",
+      "User": "nginx"
+    }
+  },
+  {
+    "timestamp": "2026-06-14T12:03:15.000Z",
+    "source": "Sysmon",
+    "host": "server01",
+    "user": "nginx",
+    "ip": "185.220.101.5",
+    "process": "C:\\Windows\\System32\\cmd.exe",
+    "event_type": "Sysmon-3",
+    "severity": "medium",
+    "event_data": {
+      "Image": "C:\\Windows\\System32\\cmd.exe",
+      "DestinationIp": "185.220.101.5",
+      "DestinationPort": "4444",
+      "User": "nginx"
+    }
+  },
+  {
+    "timestamp": "2026-06-14T12:03:30.000Z",
+    "source": "Sysmon",
+    "host": "server01",
+    "user": "nginx",
+    "ip": "",
+    "process": "C:\\Windows\\System32\\net.exe",
+    "event_type": "Sysmon-1",
+    "severity": "low",
+    "event_data": {
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe",
+      "CommandLine": "net localgroup administrators attacker /add",
+      "Image": "C:\\Windows\\System32\\net.exe",
+      "User": "nginx"
+    }
+  }
+]

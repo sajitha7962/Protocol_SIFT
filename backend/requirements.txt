@@ -1,0 +1,50 @@
+# Protocol SIFT Backend Dependencies
+
+# Web Framework
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+
+# WebSockets
+websockets==14.1
+
+# Async Task Processing (FastAPI BackgroundTasks — no Redis/Celery required for MVP)
+
+# Databases
+motor==3.6.0
+pymongo==4.9.2
+
+# Pydantic & Validation
+pydantic==2.10.4
+pydantic-settings==2.7.0
+email-validator==2.2.0
+
+# LangGraph / LangChain Agent Pipeline
+langgraph==0.2.60
+langchain==0.3.13
+langchain-core==0.3.28
+langchain-community==0.3.13
+langchain-google-genai==2.0.8
+
+# Security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# File Processing
+python-magic==0.4.27
+aiofiles==24.1.0
+
+# MITRE ATT&CK
+mitreattack-python==3.0.6
+
+# Metrics & Observability
+prometheus-client==0.21.1
+
+# Testing
+pytest==8.3.4
+pytest-asyncio==0.25.0
+httpx==0.28.1
+
+# Utilities
+python-dateutil==2.9.0
+structlog==24.4.0

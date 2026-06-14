@@ -1,0 +1,44 @@
+# Protocol SIFT — MVP Docker Compose (MongoDB only)
+#
+# For the MVP, the full stack runs without Docker.
+# MongoDB Community Server should be installed and running locally.
+#
+# Prerequisites:
+#   mongod --version
+#   mongosh mongodb://localhost:27017
+#
+# To run backend + frontend only (no Docker DB needed):
+#   cd backend && uvicorn app.main:app --reload --port 8000
+#   cd frontend && npm run dev
+#
+# This file is kept for reference. Advanced components (Neo4j, Redis, Celery)
+# will be added here in a future phase after the MVP pipeline is stable.
+
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URI=mongodb://host.docker.internal:27017/protocol_sift
+      - MONGODB_DB=protocol_sift
+    networks:
+      - sift-network
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    networks:
+      - sift-network
+
+networks:
+  sift-network:
+    driver: bridge
+
